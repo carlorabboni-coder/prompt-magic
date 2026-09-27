@@ -29,15 +29,15 @@ function generic(profile: LLMProfile, k: LLMKnowledge, user: string): string {
 const composers: Record<string, (_p: LLMProfile, _k: LLMKnowledge, _u: string) => string> = {
   // OpenAI: instructions FIRST, ### / """ separators, specific numbers, effort-aware
   chatgpt: (_p, k, u) =>
-    `Act as a world-class expert in the required domain.\n\n### Instructions\nFollow these steps in order:\n1. State the goal in one sentence.\n2. Work through the task with explicit reasoning (request higher reasoning effort for hard problems).\n3. Deliver the result in the FORMAT below.\n\n### Constraints\n- No filler; every sentence must add value.\n- Use concrete numbers for length ("3–5 sentences"), never vague words.\n- If data is missing, flag it and state the most reasonable assumption.\n\n### Context\n"""\n${u}\n"""\n\n### Output format (markdown)\n## Result\n## Details\n## Next steps${shots(k)}\n\nGuidance: ${k.tokenBudgetGuidance}.${avoid(k)}`,
+    `Act as a world-class expert in the required domain.\n\n### Instructions\nFollow these steps in order:\n1. State the goal in one sentence.\n2. Work through the task with explicit reasoning (request higher reasoning effort for hard problems).\n3. Deliver the result in the FORMAT below.\n\n### Constraints\n- No filler; every sentence must add value.\n- Use direct action verbs ("Generate 5 ideas", not "could you maybe help…?").\n- Use concrete numbers for length ("3–5 sentences"), never vague words.\n- If data is missing, flag it and state the most reasonable assumption.\n\n### Success criteria\nA busy non-expert understands and can act on the result in under 2 minutes.\n\n### Context\n"""\n${u}\n"""\n\n### Output format (markdown)\n## Result\n## Details\n## Next steps${shots(k)}\n\nGuidance: ${k.tokenBudgetGuidance}.${avoid(k)}`,
 
   // Anthropic: XML blocks, positive instructions, thinking in examples, no preamble
   claude: (_p, k, u) =>
-    `<instructions>\nYou are an expert assistant: precise, honest, proactive. Think thoroughly (adaptive thinking), then respond directly without preamble — never start with "Here is…" or "Based on…". Say what to do, concretely.\n</instructions>\n<context>\n${u}\n</context>\n<input>\nThe task above. Reason inside <thinking>, then deliver the final answer inside <answer> using clean markdown.\n</input>${shots(k)}\n\nNote: ${k.tokenBudgetGuidance}.${avoid(k)}`,
+    `<instructions>\nYou are an expert assistant: precise, honest, proactive. Reason at high effort (adaptive thinking — do NOT narrate the word "thinking", just reason), then respond directly without preamble — never start with "Here is…" or "Based on…". Use action-oriented verbs ("Change X", not "consider suggesting"). If uncertain, say "I don't know" rather than guessing. Do not overengineer: solve exactly what is asked.\n</instructions>\n<context>\n${u}\n</context>\n<input>\nThe task above. Reason inside <thinking>, then deliver the final answer inside <answer> using clean markdown.\n</input>${shots(k)}\n\nNote: ${k.tokenBudgetGuidance}.${avoid(k)}`,
 
   // Google: System Instruction + few-shot always + context first, task last with anchor
   gemini: (_p, k, u) =>
-    `[SYSTEM INSTRUCTION — You are a senior analyst: accurate, structured, never invent. Today is 27 September 2026; use this date for any time-sensitive query.]\n\n[CONTEXT]\n${u}\n\n[EXAMPLES]\nFollow the exact format of the examples: consistent structure, tags and separators.${shots(k)}\n\n[TASK — based on the information above]\nComplete the task described in CONTEXT, then deliver with these headings:\n1. Summary (max 5 lines)\n2. Analysis\n3. Risks / limits\n4. Recommendation\n\n${k.tokenBudgetGuidance}.${avoid(k)}`,
+    `[SYSTEM INSTRUCTION — You are a senior analyst: accurate, structured, never invent. Today is 27 September 2026; use this date for any time-sensitive query.]\n\n[CONTEXT]\n${u}\n\n[EXAMPLES]\nFollow the exact format of the examples: consistent structure, tags and separators.${shots(k)}\n\n[TASK — based on the information above]\nComplete the task described in CONTEXT, then deliver with these headings:\n1. Summary (max 5 lines)\n2. Analysis\n3. Risks / limits\n4. Recommendation\n5. Success criteria (how to tell the result is good)\n\n${k.tokenBudgetGuidance}.${avoid(k)}`,
 
   // SpaceXAI: goal + effort + explicit verification
   grok: (_p, k, u) =>
@@ -49,11 +49,11 @@ const composers: Record<string, (_p: LLMProfile, _k: LLMKnowledge, _u: string) =
 
   // Copilot: agent-mode brief with acceptance criteria + verify command
   copilot: (_p, _k, u) =>
-    `// GOAL: ${u}\n// REPO CONTEXT: point at the relevant files/dirs (paths, not pasted code)\n// ACCEPTANCE CRITERIA: typed code, edge cases handled, tests updated\n// VERIFY: run the relevant tests/build/lint and report the result\n// RULES: TypeScript strict, no implicit any, pure exported functions\n\n// Implement below the signature:`,
+    `// GOAL: ${u}\n// REPO CONTEXT: point at the relevant files/dirs (paths, not pasted code)\n// ACTION: Change the code — do not merely suggest changes.\n// DO NOT overengineer: minimal diff, touch only the files above.\n// VERBOSITY: explain in max 5 bullets.\n// ACCEPTANCE CRITERIA: typed code, edge cases handled, tests updated\n// VERIFY: run the relevant tests/build/lint and report the result\n// RULES: TypeScript strict, no implicit any, pure exported functions\n\n// Implement below the signature:`,
 
   // Perplexity Agent API: intensity preset + perimeter + time window + citations
   perplexity: (_p, k, u) =>
-    `Research question: ${u}\n\nIntensity preset: high (deep, multi-step investigation).\nSource perimeter: official docs, changelogs and reputable benchmarks only.\nTime window: 2025–2026 (today is 27 September 2026).\nOutput: comparison table + final verdict. Cite EVERY factual claim with numbered sources [1][2][3].${avoid(k)}`,
+    `Research question: ${u}\n\nIntensity preset: high (deep, multi-step investigation).\nSource perimeter: official docs, changelogs and reputable benchmarks only.\nTime window: 2025–2026 (today is 27 September 2026).\nOutput: comparison table + final verdict + a separate "Uncertain / unknown" section. Cite EVERY factual claim with numbered sources [1][2][3]; never present guesses as facts.${avoid(k)}`,
 
   // DeepSeek: mode-first reasoning trace
   deepseek: (_p, k, u) =>
@@ -69,7 +69,7 @@ const composers: Record<string, (_p: LLMProfile, _k: LLMKnowledge, _u: string) =
 
   // OpenCode: AGENTS.md-native agent brief
   opencode: (_p, k, u) =>
-    `GOAL: ${u}\nAGENT: build (use plan first for anything touching >3 files).\nALLOWED TOOLS: read, grep, glob, edit, bash (tests/build only).\nSTEPS: 1) locate files 2) minimal edit 3) verify.\nVERIFY: run the relevant tests/build and paste the output.\nDONE WHEN: minimal diff + green verification.${avoid(k)}`,
+    `GOAL: ${u}\nAGENT: build (use plan first for anything touching more than 3 files).\nFILE ALLOWLIST: only the files needed for this goal — do NOT touch unrelated code.\nALLOWED TOOLS: read, grep, glob, edit, bash (tests/build only).\nSTEPS: 1) locate files 2) minimal edit 3) verify. Keep steps independent so they parallelize.\nANTI-OVERENGINEERING: smallest diff that satisfies the goal; no drive-by refactors.\nVERIFY: run the relevant tests/build and paste the output.\nDONE WHEN: minimal diff + green verification.${avoid(k)}`,
 
   // Mistral: concise [INST]
   mistral: (_p, _k, u) =>
@@ -81,7 +81,7 @@ const composers: Record<string, (_p: LLMProfile, _k: LLMKnowledge, _u: string) =
 
   // Suno V5.5 lyrics: persona + chorus job + syllable budget + [End]
   'suno-lyrics': (_p, _k, u) =>
-    `Write singable lyrics (match the topic's language).\nTheme + POV: ${u}\nChorus job: ONE repeatable hook line carrying the single main message.\nStructure: [Verse 1] [Pre-Chorus] [Chorus] [Verse 2] [Chorus] [Bridge] [Chorus] [Outro] [End]\nSyllable budget: 8–11 per line for pop feel; repeat the chorus word-for-word under each [Chorus] tag.\nRules: short lines, concrete scenes over abstractions, memorable easy-to-sing chorus.`,
+    `Write singable lyrics (match the topic's language).\nLyric persona: define WHO is singing and in what tone before any lines.\nTheme + POV: ${u}\nChorus job: ONE repeatable hook line carrying the single main message.\nStructure: [Verse 1] [Pre-Chorus] [Chorus] [Verse 2] [Chorus] [Bridge] [Chorus] [Outro] [End]\nSyllable budget: 8–11 per line for pop feel (13–16 rap, 4–8 chants); repeat the chorus word-for-word under each [Chorus] tag.\nRules: short lines, concrete scenes over abstractions, memorable easy-to-sing chorus. Use [brackets] for directions — never (parentheses), they get sung.`,
 
   // GPT Image 2: dense visual description + render params
   'chatgpt-image': (_p, _k, u) =>
