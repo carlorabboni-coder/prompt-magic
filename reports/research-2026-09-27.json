@@ -1,338 +1,158 @@
 {
-  "startedAt": "2026-09-27T16:58:13.490Z",
-  "mode": "free",
+  "startedAt": "2026-09-27T17:33:44.213Z",
+  "mode": "dry-run",
   "cost": "0 EUR — giro FREE senza API a pagamento",
   "results": [
     {
       "slug": "chatgpt",
-      "status": "checked",
+      "status": "planned",
       "urls": [
-        "https://platform.openai.com/docs/guides/prompt-engineering"
+        "https://developers.openai.com/api/docs/guides/prompt-engineering"
       ],
-      "docs": [
-        {
-          "url": "https://platform.openai.com/docs/guides/prompt-engineering",
-          "http": 200,
-          "ok": true,
-          "title": "Prompt engineering | OpenAI API",
-          "description": "Learn strategies and tactics for better results using large language models in the OpenAI API.",
-          "bytes": 687735,
-          "sha256": "aba54e0958bb4aff"
-        }
-      ],
-      "firecrawl": [],
       "queries": [
-        "openai prompt engineering best practices site:platform.openai.com",
-        "openai cookbook prompting github"
+        "GPT-6 Astra prompting reasoning effort guide",
+        "openai prompt engineering guide developers"
       ]
     },
     {
       "slug": "claude",
-      "status": "checked",
+      "status": "planned",
       "urls": [
-        "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview"
+        "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/claude-prompting-best-practices"
       ],
-      "docs": [
-        {
-          "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview",
-          "http": 200,
-          "ok": true,
-          "title": "Prompt engineering overview - Claude Platform Docs",
-          "description": "Learn when prompt engineering is the right solution, and find Claude prompting techniques and interactive tutorials.",
-          "bytes": 338266,
-          "sha256": "9be11476e86399d6"
-        }
-      ],
-      "firecrawl": [],
       "queries": [
-        "anthropic prompt library xml tags",
-        "claude prompt engineering tutorial github"
+        "Claude Opus 5.5 adaptive thinking effort prompting",
+        "anthropic xml prompt best practices 2026"
       ]
     },
     {
       "slug": "gemini",
-      "status": "checked",
+      "status": "planned",
       "urls": [
         "https://ai.google.dev/gemini-api/docs/prompting-strategies"
       ],
-      "docs": [
-        {
-          "url": "https://ai.google.dev/gemini-api/docs/prompting-strategies",
-          "http": 200,
-          "ok": true,
-          "title": "提示设计策略 &nbsp;|&nbsp; Gemini API &nbsp;|&nbsp; Google AI for Developers",
-          "description": "",
-          "bytes": 129574,
-          "sha256": "2796686bc1845a8f"
-        }
-      ],
-      "firecrawl": [],
       "queries": [
-        "gemini system instructions best practices"
+        "Gemini 3.8 Flash prompting system instruction few-shot"
       ]
     },
     {
       "slug": "grok",
-      "status": "checked",
+      "status": "planned",
       "urls": [
-        "https://docs.x.ai/docs/guides/chat"
+        "https://x.ai/news/grok-4-7"
       ],
-      "docs": [
-        {
-          "url": "https://docs.x.ai/docs/guides/chat",
-          "http": 200,
-          "ok": true,
-          "title": "Generate Text | SpaceXAI Docs",
-          "description": "Generate text with the Responses API.",
-          "bytes": 798977,
-          "sha256": "b8a6c592a0f2c1d8"
-        }
-      ],
-      "firecrawl": [],
       "queries": [
-        "grok prompting guide"
+        "Grok 4.7 reasoning effort coding guide"
       ]
     },
     {
       "slug": "meta",
-      "status": "checked",
+      "status": "planned",
       "urls": [
         "https://www.llama.com/docs/how-to-guides/prompting/"
       ],
-      "docs": [
-        {
-          "url": "https://www.llama.com/docs/how-to-guides/prompting/",
-          "http": 200,
-          "ok": true,
-          "title": "Prompt engineering | How-to Guides",
-          "description": "Learn how to improve the performance of large language models through prompt engineering by crafting effective prompts and using techniques such as zero-shot and few-shot prompting, role-based prompts, and retrieval-augmented generation. Discover how to reduce hallucinations and improve model accura",
-          "bytes": 289657,
-          "sha256": "2cb8b85e430b78e3"
-        }
-      ],
-      "firecrawl": [],
       "queries": [
-        "llama 3 instruction format prompting"
+        "Llama 4 Maverick prompting instruction format"
       ]
     },
     {
       "slug": "copilot",
-      "status": "checked",
+      "status": "planned",
       "urls": [
-        "https://docs.github.com/en/copilot/using-github-copilot/prompt-engineering-for-github-copilot"
+        "https://docs.github.com/en/copilot/reference/ai-models/supported-models"
       ],
-      "docs": [
-        {
-          "url": "https://docs.github.com/en/copilot/using-github-copilot/prompt-engineering-for-github-copilot",
-          "http": 200,
-          "ok": true,
-          "title": "Prompt engineering for GitHub Copilot Chat - GitHub Docs",
-          "description": "Follow these strategies to improve your Copilot results.",
-          "bytes": 609298,
-          "sha256": "74ccf2e914ad5dbd"
-        }
-      ],
-      "firecrawl": [],
       "queries": [
-        "github copilot prompt engineering code"
+        "GitHub Copilot multi-model agent mode best practices"
       ]
     },
     {
       "slug": "perplexity",
-      "status": "checked",
+      "status": "planned",
       "urls": [
-        "https://docs.perplexity.ai/getting-started/overview"
+        "https://docs.perplexity.ai/docs/agent-api/migrate-from-sonar/overview"
       ],
-      "docs": [
-        {
-          "url": "https://docs.perplexity.ai/getting-started/overview",
-          "http": 200,
-          "ok": true,
-          "title": "Overview - Perplexity",
-          "description": "Perplexity API Platform - build with the Router, Agent, Search, and Embeddings APIs. Real-time, web-wide research and Q&amp;A capabilities for your products.",
-          "bytes": 520662,
-          "sha256": "4694f4690e347815"
-        }
-      ],
-      "firecrawl": [],
       "queries": [
-        "perplexity sonar prompting citations"
+        "Perplexity Agent API presets Search as Code migration"
       ]
     },
     {
       "slug": "deepseek",
-      "status": "checked",
+      "status": "planned",
       "urls": [
-        "https://api-docs.deepseek.com/guides/reasoning_model"
+        "https://api-docs.deepseek.com/"
       ],
-      "docs": [
-        {
-          "url": "https://api-docs.deepseek.com/guides/reasoning_model",
-          "http": 200,
-          "ok": true,
-          "title": "Your First API Call | DeepSeek API Docs",
-          "description": "The DeepSeek API uses an API format compatible with OpenAI/Anthropic. By modifying the configuration, you can use the OpenAI/Anthropic SDK or softwares compatible with the OpenAI/Anthropic API to access the DeepSeek API.",
-          "bytes": 48043,
-          "sha256": "7ce9db1b1cc7e2ef"
-        }
-      ],
-      "firecrawl": [],
       "queries": [
-        "deepseek r1 prompting reasoning"
+        "DeepSeek V4.1 Flash thinking modes prompting"
       ]
     },
     {
       "slug": "qwen",
-      "status": "checked",
+      "status": "planned",
       "urls": [
-        "https://qwen.readthedocs.io/en/latest/"
+        "https://qwen.ai/home"
       ],
-      "docs": [
-        {
-          "url": "https://qwen.readthedocs.io/en/latest/",
-          "http": 200,
-          "ok": true,
-          "title": "Qwen",
-          "description": "",
-          "bytes": 22889,
-          "sha256": "a844f1c79c9fd8ef"
-        }
-      ],
-      "firecrawl": [],
       "queries": [
-        "qwen chatml prompting guide"
+        "Qwen3.8 Max prompting ChatML thinking guide"
       ]
     },
     {
       "slug": "hermes",
-      "status": "checked",
+      "status": "planned",
       "urls": [
-        "https://github.com/NousResearch/Hermes-Function-Calling"
+        "https://hermes4.nousresearch.com/"
       ],
-      "docs": [
-        {
-          "url": "https://github.com/NousResearch/Hermes-Function-Calling",
-          "http": 200,
-          "ok": true,
-          "title": "GitHub - NousResearch/Hermes-Function-Calling · GitHub",
-          "description": "Contribute to NousResearch/Hermes-Function-Calling development by creating an account on GitHub.",
-          "bytes": 369561,
-          "sha256": "f2f1b00341fffa29"
-        }
-      ],
-      "firecrawl": [],
       "queries": [
-        "nous hermes prompting character card"
+        "Hermes 4 hybrid think toggle prompting"
       ]
     },
     {
       "slug": "opencode",
-      "status": "checked",
+      "status": "planned",
       "urls": [
-        "https://opencode.ai/docs/"
+        "https://opencode.ai/docs"
       ],
-      "docs": [
-        {
-          "url": "https://opencode.ai/docs/",
-          "http": 200,
-          "ok": true,
-          "title": "Intro | AI coding agent built for the terminal",
-          "description": "Get started with OpenCode.",
-          "bytes": 99913,
-          "sha256": "5bc0261b0dc9fbdf"
-        }
-      ],
-      "firecrawl": [],
       "queries": [
-        "opencode agent prompting best practices"
+        "OpenCode AGENTS.md agent build plan best practices"
       ]
     },
     {
       "slug": "mistral",
-      "status": "checked",
+      "status": "planned",
       "urls": [
-        "https://docs.mistral.ai/capabilities/completion/"
+        "https://docs.mistral.ai/"
       ],
-      "docs": [
-        {
-          "url": "https://docs.mistral.ai/capabilities/completion/",
-          "http": 200,
-          "ok": true,
-          "title": "Chat completions | Mistral Docs",
-          "description": "Documentation for the deployment and usage of Mistral AI&#x27;s LLMs",
-          "bytes": 1297144,
-          "sha256": "b19b0d1d77f43ab2"
-        }
-      ],
-      "firecrawl": [],
       "queries": [
-        "mistral inst format prompting"
+        "Mistral Medium 3.5 INST prompting coding"
       ]
     },
     {
       "slug": "suno-style",
-      "status": "checked",
+      "status": "planned",
       "urls": [
-        "https://suno.com/"
+        "https://about.suno.com/release-notes"
       ],
-      "docs": [
-        {
-          "url": "https://suno.com/",
-          "http": 200,
-          "ok": true,
-          "title": "Suno | AI Music Generator",
-          "description": "Create stunning original music for free in seconds using our AI generator. Make your own masterpieces, share with friends, and discover music from artists worldwide.",
-          "bytes": 263242,
-          "sha256": "f37e8e8da8bf4a89"
-        }
-      ],
-      "firecrawl": [],
       "queries": [
-        "suno style prompt tags genre bpm metatags guide 2025 2026"
+        "Suno V5.5 style formula 5-part tags BPM 2026"
       ]
     },
     {
       "slug": "suno-lyrics",
-      "status": "checked",
+      "status": "planned",
       "urls": [
-        "https://suno.com/"
+        "https://about.suno.com/release-notes"
       ],
-      "docs": [
-        {
-          "url": "https://suno.com/",
-          "http": 200,
-          "ok": true,
-          "title": "Suno | AI Music Generator",
-          "description": "Create stunning original music for free in seconds using our AI generator. Make your own masterpieces, share with friends, and discover music from artists worldwide.",
-          "bytes": 263637,
-          "sha256": "e2ce422dfcf8d288"
-        }
-      ],
-      "firecrawl": [],
       "queries": [
-        "suno lyrics structure verse chorus bridge songwriting guide"
+        "Suno V5.5 lyrics structure tags syllable End 2026"
       ]
     },
     {
       "slug": "chatgpt-image",
-      "status": "failed",
+      "status": "planned",
       "urls": [
-        "https://openai.com/index/dall-e-3/"
+        "https://developers.openai.com/api/docs/guides/image-generation"
       ],
-      "docs": [
-        {
-          "url": "https://openai.com/index/dall-e-3/",
-          "http": 403,
-          "ok": false,
-          "title": "",
-          "description": "",
-          "bytes": 9874,
-          "sha256": "ed0c481f1686f6e7"
-        }
-      ],
-      "firecrawl": [],
       "queries": [
-        "dall-e 3 prompt tips natural language guide"
+        "gpt-image-2 prompt guide quality size multi-turn editing"
       ]
     }
   ]

@@ -1,6 +1,7 @@
-// ── Prompt Magic · motore di composizione prompt ──────────────────────────
-// OPTIMIZED = [PRIMER] + [STRUTTURA] + [PROMPT UTENTE ARRICCHITO] + [ESEMPI] + [VINCOLI]
-// Ogni profilo ha un composer dedicato; il fallback usa la struttura generica.
+// ── Prompt Magic · composition engine v2 (27 Sept 2026) ───────────────────
+// Output language: ENGLISH (models perform best with English framing;
+// the user's content/topic is preserved verbatim in its own block).
+// Per-model algorithms follow the vendors' official prompting guides.
 
 import type { GeneratedPrompt, LLMKnowledge, LLMProfile } from '../types';
 
@@ -8,72 +9,83 @@ export function estimateTokens(text: string): number {
   return Math.ceil(text.length / 4);
 }
 
-function header(name: string, version: number): string {
-  return `Ottimizzato per ${name} · knowledge v${version}`;
+function avoid(k: LLMKnowledge): string {
+  if (!k.antiPatterns.length) return '';
+  return `\nAvoid: ${k.antiPatterns.slice(0, 3).join('; ')}.`;
 }
 
-function withAnti(knowledge: LLMKnowledge): string {
-  if (!knowledge.antiPatterns.length) return '';
-  return `\nEvita: ${knowledge.antiPatterns.slice(0, 3).join('; ')}.`;
-}
-
-function withShots(knowledge: LLMKnowledge): string {
-  const shots = knowledge.fewShotExamples.filter((s) => s.input || s.output).slice(0, 2);
-  if (!shots.length) return '';
-  return `\n\nRiferimento di stile:\n${shots.map((s, i) => `Esempio ${i + 1} — Input: ${s.input}\nOutput: ${s.output}`).join('\n')}`;
+function shots(k: LLMKnowledge): string {
+  const s = k.fewShotExamples.filter((x) => x.input || x.output).slice(0, 2);
+  if (!s.length) return '';
+  return `\n\nStyle reference:\n${s.map((x, i) => `Example ${i + 1} — Input: ${x.input}\nOutput: ${x.output}`).join('\n')}`;
 }
 
 function generic(profile: LLMProfile, k: LLMKnowledge, user: string): string {
   const secs = k.preferredStructure.sections;
   const body = secs.map((s) => `${s.toUpperCase()}:\n${user}`).join('\n\n');
-  return `${header(profile.name, k.version)}\nStile: ${k.systemPromptStyle}\n\n${body}${withShots(k)}\n\nVincolo: ${k.tokenBudgetGuidance}.${withAnti(k)}`;
+  return `Optimized for ${profile.name} · knowledge v${k.version}\nStyle: ${k.systemPromptStyle}\n\n${body}${shots(k)}\n\nConstraint: ${k.tokenBudgetGuidance}.${avoid(k)}`;
 }
 
 const composers: Record<string, (_p: LLMProfile, _k: LLMKnowledge, _u: string) => string> = {
+  // OpenAI: instructions FIRST, ### / """ separators, specific numbers, effort-aware
   chatgpt: (_p, k, u) =>
-    `Agisci come un esperto di livello mondiale nel dominio richiesto.\n\nCONTESTO:\n${u}\n\nCOMPITO — esegui questi passi:\n1. Chiarisci l'obiettivo in 1 frase.\n2. Svolgi il compito con ragionamento esplicito.\n3. Consegna il risultato nel FORMATO qui sotto.\n\nVINCOLI:\n- Niente riempitivo; ogni frase aggiunge valore.\n- Se un dato manca, segnalalo e proponi l'assunzione più ragionevole.\n\nFORMATO OUTPUT (markdown):\n## Risultato\n## Dettagli\n## Prossimi passi${withShots(k)}\n\nGuida: ${k.tokenBudgetGuidance}.${withAnti(k)}`,
+    `Act as a world-class expert in the required domain.\n\n### Instructions\nFollow these steps in order:\n1. State the goal in one sentence.\n2. Work through the task with explicit reasoning (request higher reasoning effort for hard problems).\n3. Deliver the result in the FORMAT below.\n\n### Constraints\n- No filler; every sentence must add value.\n- Use concrete numbers for length ("3–5 sentences"), never vague words.\n- If data is missing, flag it and state the most reasonable assumption.\n\n### Context\n"""\n${u}\n"""\n\n### Output format (markdown)\n## Result\n## Details\n## Next steps${shots(k)}\n\nGuidance: ${k.tokenBudgetGuidance}.${avoid(k)}`,
 
+  // Anthropic: XML blocks, positive instructions, thinking in examples, no preamble
   claude: (_p, k, u) =>
-    `<ruolo>Sei un assistente esperto, preciso e onesto.</ruolo>\n<contesto>${u}</contesto>\n<compito>Svolgi il compito sopra. Ragiona passo-passo dentro <ragionamento>, poi consegna la risposta finale dentro <risposta> usando markdown pulito.</compito>${withShots(k)}\n\nNota: ${k.tokenBudgetGuidance}.${withAnti(k)}`,
+    `<instructions>\nYou are an expert assistant: precise, honest, proactive. Think thoroughly (adaptive thinking), then respond directly without preamble — never start with "Here is…" or "Based on…". Say what to do, concretely.\n</instructions>\n<context>\n${u}\n</context>\n<input>\nThe task above. Reason inside <thinking>, then deliver the final answer inside <answer> using clean markdown.\n</input>${shots(k)}\n\nNote: ${k.tokenBudgetGuidance}.${avoid(k)}`,
 
+  // Google: System Instruction + few-shot always + context first, task last with anchor
   gemini: (_p, k, u) =>
-    `[SYSTEM INSTRUCTION — Sei un analista senior: accurato, strutturato, senza invenzioni.]\n\n[USER]\nContesto e compito:\n${u}\n\nConsegna con queste intestazioni:\n1. Sintesi (≤5 righe)\n2. Analisi\n3. Rischi / limiti\n4. Raccomandazione${withShots(k)}\n\n${k.tokenBudgetGuidance}.${withAnti(k)}`,
+    `[SYSTEM INSTRUCTION — You are a senior analyst: accurate, structured, never invent. Today is 27 September 2026; use this date for any time-sensitive query.]\n\n[CONTEXT]\n${u}\n\n[EXAMPLES]\nFollow the exact format of the examples: consistent structure, tags and separators.${shots(k)}\n\n[TASK — based on the information above]\nComplete the task described in CONTEXT, then deliver with these headings:\n1. Summary (max 5 lines)\n2. Analysis\n3. Risks / limits\n4. Recommendation\n\n${k.tokenBudgetGuidance}.${avoid(k)}`,
 
+  // SpaceXAI: goal + effort + explicit verification
   grok: (_p, k, u) =>
-    `Obiettivo: ${u}\n\nTono: diretto, arguto, zero fuffa. Vai dritto al punto ma resta accurato.${withAnti(k)}`,
+    `Goal: ${u}\n\nReasoning effort: high — work longer on difficult parts and double-check your own answers.\nVerification: cross-check the 2 most important claims before finalizing.\nTone: sharp, direct, zero fluff. Stay accurate.${avoid(k)}`,
 
+  // Meta: Alpaca-style instruction tuning
   meta: (_p, k, u) =>
-    `### Instruction:\nSvolgi il compito sotto in modo accurato e conciso, in italiano.\n\n### Input:\n${u}\n\n### Response:\n${withAnti(k)}`,
+    `### Instruction:\nComplete the task below accurately and concisely.\n\n### Input:\n${u}\n\n### Response:\n${avoid(k)}`,
 
+  // Copilot: agent-mode brief with acceptance criteria + verify command
   copilot: (_p, _k, u) =>
-    `// OBIETTIVO: ${u}\n// REGOLE: TypeScript strict, niente any impliciti, gestisci gli errori, esporta funzioni pure.\n// ESEMPIO I/O ATTESO: input tipizzato → output tipizzato + test rapido.\n\n// Scrivi sotto la firma, poi l'implementazione:`,
+    `// GOAL: ${u}\n// REPO CONTEXT: point at the relevant files/dirs (paths, not pasted code)\n// ACCEPTANCE CRITERIA: typed code, edge cases handled, tests updated\n// VERIFY: run the relevant tests/build/lint and report the result\n// RULES: TypeScript strict, no implicit any, pure exported functions\n\n// Implement below the signature:`,
 
+  // Perplexity Agent API: intensity preset + perimeter + time window + citations
   perplexity: (_p, k, u) =>
-    `Domanda di ricerca: ${u}\n\nPerimetro: fonti ufficiali e documentazione aggiornata (2025–2026).\nProfondità: confronto critico, non elenco.\nFormato: tabella comparativa + verdetto finale con citazioni numerate [1][2][3].${withAnti(k)}`,
+    `Research question: ${u}\n\nIntensity preset: high (deep, multi-step investigation).\nSource perimeter: official docs, changelogs and reputable benchmarks only.\nTime window: 2025–2026 (today is 27 September 2026).\nOutput: comparison table + final verdict. Cite EVERY factual claim with numbered sources [1][2][3].${avoid(k)}`,
 
+  // DeepSeek: mode-first reasoning trace
   deepseek: (_p, k, u) =>
-    `OBIETTIVO: ${u}\n\nPIANO: elenca prima i passi di ragionamento (ipotesi, verifiche, criteri).\nESECUZIONE: svolgi ogni passo esplicitamente.\nRISPOSTA FINALE: soluzione + perché funziona + come verificarla.${withShots(k)}`,
+    `Mode: Think High (deliberate logical analysis; use Think Max only if the problem resists).\n\nOBJECTIVE: ${u}\n\nPLAN: list the reasoning steps first (hypotheses, checks, criteria).\nEXECUTION: carry out each step explicitly.\nFINAL ANSWER: solution + why it works + how to verify it.${shots(k)}`,
 
+  // Qwen: ChatML + explicit language, thinking on
   qwen: (_p, k, u) =>
-    `<|im_start|>system\nSei un assistente preciso. Rispondi in italiano (termini tecnici in inglese quando standard).<|im_end|>\n<|im_start|>user\n${u}\n\nVincoli: ${k.tokenBudgetGuidance}.<|im_end|>\n<|im_start|>assistant\n`,
+    `<|im_start|>system\nYou are a precise assistant. Answer in English (keep standard technical terms as-is). Show 3 brief reasoning bullets, then the final answer.<|im_end|>\n<|im_start|>user\n${u}\n\nConstraints: ${k.tokenBudgetGuidance}.<|im_end|>\n<|im_start|>assistant\n`,
 
+  // Hermes 4: persona card + <think> toggle
   hermes: (_p, k, u) =>
-    `PERSONAGGIO: esperto versatile, stile adattivo, memoria della scena.\nSCENARIO: l'utente chiede — "${u}".\nOBIETTIVO SCENA: rispondere in modo utile e coerente col personaggio.\nSTILE: vivido ma preciso.\nVINCOLI: niente incoerenze di ruolo.${withAnti(k)}`,
+    `PERSONA CARD: versatile expert, adaptive style, consistent memory of the scene.\nSCENARIO: the user asks — "${u}".\nTHINKING: <think> through hard parts only; answer directly otherwise.\nSCENE OBJECTIVE: respond usefully and stay in character.\nSTYLE: vivid but precise.\nCONSTRAINTS: no role incoherence, no lecturing.${avoid(k)}`,
 
+  // OpenCode: AGENTS.md-native agent brief
   opencode: (_p, k, u) =>
-    `GOAL: ${u}\nTOOLS CONSENTITI: read, grep, glob, edit, bash (test/build).\nSTEPS: 1) localizza i file 2) modifica minima 3) verifica.\nVERIFY: esegui test/build rilevanti e riporta l'output.\nDONE QUANDO: diff minima + verifica verde.${withAnti(k)}`,
+    `GOAL: ${u}\nAGENT: build (use plan first for anything touching >3 files).\nALLOWED TOOLS: read, grep, glob, edit, bash (tests/build only).\nSTEPS: 1) locate files 2) minimal edit 3) verify.\nVERIFY: run the relevant tests/build and paste the output.\nDONE WHEN: minimal diff + green verification.${avoid(k)}`,
 
+  // Mistral: concise [INST]
   mistral: (_p, _k, u) =>
-    `[INST] ${u}\nRispondi in italiano, conciso e strutturato con bullet. [/INST]`,
+    `[INST] ${u}\nAnswer in English: concise, structured bullets, no filler. [/INST]`,
 
+  // Suno V5.5 style: 5-part formula, 8–15 tags, BPM bands, Exclude Styles
   'suno-style': (_p, _k, u) =>
-    `${u.toLowerCase().replace(/\s+/g, ' ').trim()}, [intro] [verse] [chorus] [verse] [chorus] [bridge] [chorus] [outro]\n\nRegole Suno: niente nomi di artisti reali; tag concreti (genere, mood, strumenti, BPM, tonalità); style <200 caratteri; aggettivi vaghi → sostituiscili con riferimenti sonori.`,
+    `${u.toLowerCase().replace(/\s+/g, ' ').trim()}, [intro] [verse] [chorus] [verse] [chorus] [bridge] [chorus] [outro]\n\nSuno V5.5 rules: 5-part order (genre → mood+energy → vocals → instruments+production → BPM); 8–15 tags total, first tag weighs most; ballads 60–80 / pop 90–120 / dance 120–150 / EDM 140–180 BPM; NO real artist names; put negations in the Exclude Styles field, never in Style; end lyrics with [End].`,
 
+  // Suno V5.5 lyrics: persona + chorus job + syllable budget + [End]
   'suno-lyrics': (_p, _k, u) =>
-    `Scrivi un testo cantabile in italiano.\nTopic: ${u}\nStruttura: [Verse 1] [Chorus] [Verse 2] [Chorus] [Bridge] [Chorus] [Outro]\nSchema rima: strofe ABAB, ritornello con rime semplici e ripetibili.\nRegole: versi brevi (≤10 sillabe), ritornello memorabile e facile da cantare, linguaggio concreto ed emotivo.`,
+    `Write singable lyrics (match the topic's language).\nTheme + POV: ${u}\nChorus job: ONE repeatable hook line carrying the single main message.\nStructure: [Verse 1] [Pre-Chorus] [Chorus] [Verse 2] [Chorus] [Bridge] [Chorus] [Outro] [End]\nSyllable budget: 8–11 per line for pop feel; repeat the chorus word-for-word under each [Chorus] tag.\nRules: short lines, concrete scenes over abstractions, memorable easy-to-sing chorus.`,
 
+  // GPT Image 2: dense visual description + render params
   'chatgpt-image': (_p, _k, u) =>
-    `${u.trim().replace(/\.$/, '')}, rendered in rich cinematic detail with coherent lighting, thoughtful composition and a harmonious palette. Photorealistic texture, sharp focus on the subject, atmospheric depth, no text or watermark.`,
+    `${u.trim().replace(/\.$/, '')}, rendered in rich cinematic detail with coherent lighting, thoughtful composition and a harmonious palette. Photorealistic texture, sharp focus on the subject, atmospheric depth. Render params: high quality, 1536x1024, png. No watermark; include text in the image only if explicitly requested, lettered exactly as specified.`,
 };
 
 export function composePrompt(profile: LLMProfile, knowledge: LLMKnowledge, userPrompt: string): GeneratedPrompt {
@@ -97,10 +109,10 @@ export function composeAll(
     const k = knowledgeMap[p.id];
     if (!k) {
       const fallback: LLMKnowledge = {
-        profileId: p.id, version: 1, systemPromptStyle: 'Generico strutturato',
-        preferredStructure: { sections: ['Ruolo', 'Contesto', 'Compito', 'Vincoli', 'Formato output'] },
-        tokenBudgetGuidance: 'Medio', specialTokens: [], fewShotExamples: [],
-        antiPatterns: [], sourceUrls: [], notes: 'Profilo custom senza knowledge curata.',
+        profileId: p.id, version: 1, systemPromptStyle: 'Structured generic',
+        preferredStructure: { sections: ['Role', 'Context', 'Task', 'Constraints', 'Output format'] },
+        tokenBudgetGuidance: 'Medium', specialTokens: [], fewShotExamples: [],
+        antiPatterns: [], sourceUrls: [], notes: 'Custom profile without curated knowledge.',
       };
       return composePrompt(p, fallback, userPrompt);
     }
