@@ -1,0 +1,12 @@
+{
+  "name": "Prompt Magic",
+  "short_name": "PromptMagic",
+  "description": "Un prompt grezzo → versioni ottimizzate per ogni LLM.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0d0d",
+  "theme_color": "#0d0d0d",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

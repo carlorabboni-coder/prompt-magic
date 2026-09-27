@@ -1,0 +1,36 @@
+name: Bi-Weekly LLM Knowledge Update (100% gratis)
+
+on:
+  schedule:
+    - cron: '0 3 */14 * *' # ogni 14 giorni alle 03:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Giro FREE: nessun secret obbligatorio. Se FIRECRAWL_API_KEY è
+      # presente nei Secrets, viene usato come extra (opzionale).
+      - name: Run research pipeline (FREE, zero costi)
+        env:
+          FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+        run: node scripts/research-pipeline.js
+
+      - name: Commit report
+        run: |
+          git config user.name "prompt-magic-bot"
+          git config user.email "bot@prompt-magic.app"
+          git add reports/ || true
+          git commit -m "chore: bi-weekly knowledge research $(date +%Y-%m-%d) [free]" || true
+          git push || true

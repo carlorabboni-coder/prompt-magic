@@ -1,0 +1,28 @@
+{
+  "name": "prompt-magic",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Prompt Magic — generatore di prompt ottimizzati per 14+ LLM con knowledge base auto-aggiornante",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "preview": "vite preview",
+    "research": "node scripts/research-pipeline.js"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "@supabase/supabase-js": "^2.47.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "oxlint": "^1.81.0",
+    "typescript": "~5.9.3",
+    "vite": "^8.3.0"
+  }
+}

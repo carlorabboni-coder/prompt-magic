@@ -1,0 +1,163 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: PROMPT✦MAGIC
+      - paragraph [ref=e7]: un prompt grezzo → versioni ottimizzate per ogni LLM · knowledge auto-aggiornante
+    - navigation "Sezioni" [ref=e8]:
+      - button "Genera" [pressed] [ref=e9] [cursor=pointer]
+      - button "Profili custom" [ref=e10] [cursor=pointer]
+      - button "Cronologia (0)" [ref=e11] [cursor=pointer]
+  - toolbar "Template rapidi" [ref=e12]:
+    - button "Code review" [ref=e13] [cursor=pointer]
+    - button "Articolo SEO" [ref=e14] [cursor=pointer]
+    - button "Analisi dati" [ref=e15] [cursor=pointer]
+    - button "Ricerca verificata" [ref=e16] [cursor=pointer]
+    - button "Canzone Suno" [ref=e17] [cursor=pointer]
+    - button "Immagine cyberpunk" [ref=e18] [cursor=pointer]
+    - button "Debug ragionato" [ref=e19] [cursor=pointer]
+    - button "Traduzione tecnica" [ref=e20] [cursor=pointer]
+  - generic [ref=e21]:
+    - region "Input e modelli" [ref=e22]:
+      - generic [ref=e24]:
+        - text: Setup
+        - generic [ref=e25]: · 5 modelli
+      - generic [ref=e26]:
+        - textbox "Cerca modelli" [ref=e27]:
+          - /placeholder: ⌘K · Cerca modelli (es. suno, image, code)…
+        - generic [ref=e28]:
+          - generic [ref=e29]:
+            - button "Seleziona tutti (15)" [ref=e30] [cursor=pointer]
+            - button "Deseleziona" [ref=e31] [cursor=pointer]
+          - generic [ref=e32]:
+            - generic [ref=e33]: Chat · 2/5
+            - generic [ref=e34]:
+              - button "ChatGPT · GPT-4o Istruzioni dirette, persona esplicita, formato output rigido. aggiornato · adesso · 24 fonti" [pressed] [ref=e35] [cursor=pointer]:
+                - generic [aria-hidden] [ref=e36]: ✓
+                - generic [ref=e37]:
+                  - text: ChatGPT
+                  - generic [ref=e38]: · GPT-4o
+                  - generic [ref=e39]: Istruzioni dirette, persona esplicita, formato output rigido.
+                  - 'generic "Fonti: 24 · Ultimo aggiornamento: 27/09/2026" [ref=e40]': aggiornato · adesso · 24 fonti
+              - button "Claude · Claude 3.5 Sonnet Tag XML, ragionamento passo-passo, contesto lungo. aggiornato · adesso · 22 fonti" [pressed] [ref=e42] [cursor=pointer]:
+                - generic [aria-hidden] [ref=e43]: ✓
+                - generic [ref=e44]:
+                  - text: Claude
+                  - generic [ref=e45]: · Claude 3.5 Sonnet
+                  - generic [ref=e46]: Tag XML, ragionamento passo-passo, contesto lungo.
+                  - 'generic "Fonti: 22 · Ultimo aggiornamento: 27/09/2026" [ref=e47]': aggiornato · adesso · 22 fonti
+              - button "Gemini · Gemini 1.5 Pro Strutturato, system instruction separate, multimodale. aggiornato · adesso · 18 fonti" [ref=e49] [cursor=pointer]:
+                - generic [ref=e51]:
+                  - text: Gemini
+                  - generic [ref=e52]: · Gemini 1.5 Pro
+                  - generic [ref=e53]: Strutturato, system instruction separate, multimodale.
+                  - 'generic "Fonti: 18 · Ultimo aggiornamento: 27/09/2026" [ref=e54]': aggiornato · adesso · 18 fonti
+              - button "Grok · Grok-2 Diretto e minimalista, lascia spazio alla personalità. aggiornato · adesso · 11 fonti" [ref=e56] [cursor=pointer]:
+                - generic [ref=e58]:
+                  - text: Grok
+                  - generic [ref=e59]: · Grok-2
+                  - generic [ref=e60]: Diretto e minimalista, lascia spazio alla personalità.
+                  - 'generic "Fonti: 11 · Ultimo aggiornamento: 27/09/2026" [ref=e61]': aggiornato · adesso · 11 fonti
+              - button "DeepSeek · DeepSeek-V3 / R1 Traccia di ragionamento esplicita, plan → execute → answer. aggiornato · adesso · 14 fonti" [ref=e63] [cursor=pointer]:
+                - generic [ref=e65]:
+                  - text: DeepSeek
+                  - generic [ref=e66]: · DeepSeek-V3 / R1
+                  - generic [ref=e67]: Traccia di ragionamento esplicita, plan → execute → answer.
+                  - 'generic "Fonti: 14 · Ultimo aggiornamento: 27/09/2026" [ref=e68]': aggiornato · adesso · 14 fonti
+          - generic [ref=e70]:
+            - generic [ref=e71]: Codice · 0/2
+            - generic [ref=e72]:
+              - button "Copilot · Copilot (GPT-4o) Commenti + firme di funzione, type hint, esempi inline. aggiornato · adesso · 13 fonti" [ref=e73] [cursor=pointer]:
+                - generic [ref=e75]:
+                  - text: Copilot
+                  - generic [ref=e76]: · Copilot (GPT-4o)
+                  - generic [ref=e77]: Commenti + firme di funzione, type hint, esempi inline.
+                  - 'generic "Fonti: 13 · Ultimo aggiornamento: 27/09/2026" [ref=e78]': aggiornato · adesso · 13 fonti
+              - button "OpenCode · Agent CLI Goal → tools → steps → verify, formato agentico. aggiornato · adesso · 10 fonti" [ref=e80] [cursor=pointer]:
+                - generic [ref=e82]:
+                  - text: OpenCode
+                  - generic [ref=e83]: · Agent CLI
+                  - generic [ref=e84]: Goal → tools → steps → verify, formato agentico.
+                  - 'generic "Fonti: 10 · Ultimo aggiornamento: 27/09/2026" [ref=e85]': aggiornato · adesso · 10 fonti
+          - generic [ref=e87]:
+            - generic [ref=e88]: Ricerca · 0/1
+            - button "Perplexity · Sonar Large Query di ricerca + richiesta di citazioni e sintesi. aggiornato · adesso · 12 fonti" [ref=e90] [cursor=pointer]:
+              - generic [ref=e92]:
+                - text: Perplexity
+                - generic [ref=e93]: · Sonar Large
+                - generic [ref=e94]: Query di ricerca + richiesta di citazioni e sintesi.
+                - 'generic "Fonti: 12 · Ultimo aggiornamento: 27/09/2026" [ref=e95]': aggiornato · adesso · 12 fonti
+          - generic [ref=e97]:
+            - generic [ref=e98]: Immagini · 1/1
+            - button "ChatGPT Image (DALL·E 3) · DALL·E 3 Soggetto → ambiente → stile → luce → composizione → tecnica. aggiornato · adesso · 17 fonti" [pressed] [ref=e100] [cursor=pointer]:
+              - generic [aria-hidden] [ref=e101]: ✓
+              - generic [ref=e102]:
+                - text: ChatGPT Image (DALL·E 3)
+                - generic [ref=e103]: · DALL·E 3
+                - generic [ref=e104]: Soggetto → ambiente → stile → luce → composizione → tecnica.
+                - 'generic "Fonti: 17 · Ultimo aggiornamento: 27/09/2026" [ref=e105]': aggiornato · adesso · 17 fonti
+          - generic [ref=e107]:
+            - generic [ref=e108]: Musica · 2/2
+            - generic [ref=e109]:
+              - button "Suno · Style · Suno v4 Tag genere + mood + strumenti + BPM + struttura sezioni. aggiornato · adesso · 16 fonti" [pressed] [ref=e110] [cursor=pointer]:
+                - generic [aria-hidden] [ref=e111]: ✓
+                - generic [ref=e112]:
+                  - text: Suno · Style
+                  - generic [ref=e113]: · Suno v4
+                  - generic [ref=e114]: Tag genere + mood + strumenti + BPM + struttura sezioni.
+                  - 'generic "Fonti: 16 · Ultimo aggiornamento: 27/09/2026" [ref=e115]': aggiornato · adesso · 16 fonti
+              - button "Suno · Lyrics · Suno v4 Topic + schema rima + struttura canzone + lingua + tono. aggiornato · adesso · 16 fonti" [pressed] [ref=e117] [cursor=pointer]:
+                - generic [aria-hidden] [ref=e118]: ✓
+                - generic [ref=e119]:
+                  - text: Suno · Lyrics
+                  - generic [ref=e120]: · Suno v4
+                  - generic [ref=e121]: Topic + schema rima + struttura canzone + lingua + tono.
+                  - 'generic "Fonti: 16 · Ultimo aggiornamento: 27/09/2026" [ref=e122]': aggiornato · adesso · 16 fonti
+          - generic [ref=e124]:
+            - generic [ref=e125]: Agenti · 0/1
+            - button "Hermes Agent · Hermes 3 (Llama 3.1) Character card + scenario, steered roleplay, tool-use. aggiornato · adesso · 9 fonti" [ref=e127] [cursor=pointer]:
+              - generic [ref=e129]:
+                - text: Hermes Agent
+                - generic [ref=e130]: · Hermes 3 (Llama 3.1)
+                - generic [ref=e131]: Character card + scenario, steered roleplay, tool-use.
+                - 'generic "Fonti: 9 · Ultimo aggiornamento: 27/09/2026" [ref=e132]': aggiornato · adesso · 9 fonti
+          - generic [ref=e134]:
+            - generic [ref=e135]: Open weights · 0/3
+            - generic [ref=e136]:
+              - 'button "Meta AI (Llama) · Llama 3.1 70B Formato ### Instruction / ### Response, sistem prompt chiaro. aggiornato · adesso · 15 fonti" [ref=e137] [cursor=pointer]':
+                - generic [ref=e139]:
+                  - text: Meta AI (Llama)
+                  - generic [ref=e140]: · Llama 3.1 70B
+                  - generic [ref=e141]: "Formato ### Instruction / ### Response, sistem prompt chiaro."
+                  - 'generic "Fonti: 15 · Ultimo aggiornamento: 27/09/2026" [ref=e142]': aggiornato · adesso · 15 fonti
+              - button "Qwen · Qwen 2.5 / 3 ChatML strutturato, supporto bilingue ZH/EN/IT. aggiornato · adesso · 12 fonti" [ref=e144] [cursor=pointer]:
+                - generic [ref=e146]:
+                  - text: Qwen
+                  - generic [ref=e147]: · Qwen 2.5 / 3
+                  - generic [ref=e148]: ChatML strutturato, supporto bilingue ZH/EN/IT.
+                  - 'generic "Fonti: 12 · Ultimo aggiornamento: 27/09/2026" [ref=e149]': aggiornato · adesso · 12 fonti
+              - button "Mistral · Mistral Large 2 Istruzioni concise, formato [INST], EU-multilingua. aggiornato · adesso · 10 fonti" [ref=e151] [cursor=pointer]:
+                - generic [ref=e153]:
+                  - text: Mistral
+                  - generic [ref=e154]: · Mistral Large 2
+                  - generic [ref=e155]: Istruzioni concise, formato [INST], EU-multilingua.
+                  - 'generic "Fonti: 10 · Ultimo aggiornamento: 27/09/2026" [ref=e156]': aggiornato · adesso · 10 fonti
+    - region "Generatore" [ref=e158]:
+      - generic [ref=e159]:
+        - generic [ref=e160]: Prompt
+        - generic [ref=e163]:
+          - text: Il tuo prompt grezzo
+          - textbox "Il tuo prompt grezzo" [ref=e164]:
+            - /placeholder: "Es: una ballata malinconica sul mare d'inverno, stile indie folk… oppure: spiega la fotosintesi a un bambino di 8 anni…"
+          - generic [ref=e165]:
+            - generic [ref=e166]: 0 caratteri · ~0 token stimati
+            - generic [ref=e167]: ⌘/Ctrl + Invio per generare
+          - generic [ref=e168]:
+            - button "✦ Genera prompt ottimizzati" [disabled] [ref=e169]
+            - button "Pulisci" [disabled] [ref=e170]
+          - paragraph [ref=e171]: "Seleziona uno o più modelli a destra: Prompt Magic riscrive il tuo testo con struttura, stile e vincoli specifici per ciascuno. 1–9 per toggle rapido, ⌘K per cercare modelli."
+      - generic [ref=e172]:
+        - strong [ref=e173]: Nessun risultato ancora
+        - text: "Scrivi il prompt, seleziona i modelli (consiglio: prova “Canzone Suno” o “Immagine cyberpunk” dai template), poi Genera."
+  - contentinfo [ref=e174]:
+    - generic [ref=e175]: Prompt Magic v1.0 · 15 profili curati · knowledge versionata · research ogni 14 giorni via GitHub Actions + Firecrawl
+    - generic [ref=e176]: ⌘↵ genera · ⌘K cerca · 1-9 toggle · ?prompt=&llms= per link condivisibili
