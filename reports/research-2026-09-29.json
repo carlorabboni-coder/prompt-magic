@@ -1,0 +1,335 @@
+{
+  "startedAt": "2026-09-29T09:27:25.873Z",
+  "mode": "free",
+  "cost": "0 EUR — giro FREE senza API a pagamento",
+  "results": [
+    {
+      "slug": "chatgpt",
+      "status": "checked",
+      "urls": [
+        "https://developers.openai.com/api/docs/guides/prompt-engineering"
+      ],
+      "docs": [
+        {
+          "url": "https://developers.openai.com/api/docs/guides/prompt-engineering",
+          "http": 200,
+          "ok": true,
+          "title": "Prompt engineering | OpenAI API",
+          "description": "Learn strategies and tactics for better results using large language models in the OpenAI API.",
+          "bytes": 687735,
+          "sha256": "e14daa9fceebf3ca"
+        }
+      ],
+      "firecrawl": [],
+      "queries": [
+        "GPT-6 Astra prompting reasoning effort guide",
+        "openai prompt engineering guide developers"
+      ]
+    },
+    {
+      "slug": "claude",
+      "status": "checked",
+      "urls": [
+        "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/claude-prompting-best-practices"
+      ],
+      "docs": [
+        {
+          "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/claude-prompting-best-practices",
+          "http": 200,
+          "ok": true,
+          "title": "Prompting best practices - Claude Platform Docs",
+          "description": "Comprehensive guide to prompt engineering techniques for Claude&#x27;s latest models, covering clarity, examples, XML structuring, thinking, and agentic systems.",
+          "bytes": 881470,
+          "sha256": "d660dfcf593d9733"
+        }
+      ],
+      "firecrawl": [],
+      "queries": [
+        "Claude Opus 5.5 adaptive thinking effort prompting",
+        "anthropic xml prompt best practices 2026"
+      ]
+    },
+    {
+      "slug": "gemini",
+      "status": "checked",
+      "urls": [
+        "https://ai.google.dev/gemini-api/docs/prompting-strategies"
+      ],
+      "docs": [
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/prompting-strategies",
+          "http": 200,
+          "ok": true,
+          "title": "Prompt design strategies &nbsp;|&nbsp; Gemini API &nbsp;|&nbsp; Google AI for Developers",
+          "description": "",
+          "bytes": 143014,
+          "sha256": "f27513417bf4202c"
+        }
+      ],
+      "firecrawl": [],
+      "queries": [
+        "Gemini 3.8 Flash prompting system instruction few-shot"
+      ]
+    },
+    {
+      "slug": "grok",
+      "status": "checked",
+      "urls": [
+        "https://x.ai/news/grok-4-7"
+      ],
+      "docs": [
+        {
+          "url": "https://x.ai/news/grok-4-7",
+          "http": 200,
+          "ok": true,
+          "title": "Introducing Grok 4.7 | SpaceXAI",
+          "description": "SpaceXAI&#x27;s most powerful model for coding and knowledge work. Twice as fast, at half the price of comparable models.",
+          "bytes": 292617,
+          "sha256": "e3a0c74200f6d48e"
+        }
+      ],
+      "firecrawl": [],
+      "queries": [
+        "Grok 4.7 reasoning effort coding guide"
+      ]
+    },
+    {
+      "slug": "meta",
+      "status": "checked",
+      "urls": [
+        "https://www.llama.com/docs/how-to-guides/prompting/"
+      ],
+      "docs": [
+        {
+          "url": "https://www.llama.com/docs/how-to-guides/prompting/",
+          "http": 200,
+          "ok": true,
+          "title": "Prompt engineering | How-to Guides",
+          "description": "Learn how to improve the performance of large language models through prompt engineering by crafting effective prompts and using techniques such as zero-shot and few-shot prompting, role-based prompts, and retrieval-augmented generation. Discover how to reduce hallucinations and improve model accura",
+          "bytes": 289658,
+          "sha256": "aeedc01353031fbc"
+        }
+      ],
+      "firecrawl": [],
+      "queries": [
+        "Llama 4 Maverick prompting instruction format"
+      ]
+    },
+    {
+      "slug": "copilot",
+      "status": "checked",
+      "urls": [
+        "https://docs.github.com/en/copilot/reference/ai-models/supported-models"
+      ],
+      "docs": [
+        {
+          "url": "https://docs.github.com/en/copilot/reference/ai-models/supported-models",
+          "http": 200,
+          "ok": true,
+          "title": "Supported AI models in GitHub Copilot - GitHub Docs",
+          "description": "Learn about the supported AI models in GitHub Copilot.",
+          "bytes": 1419472,
+          "sha256": "cc281660625acd80"
+        }
+      ],
+      "firecrawl": [],
+      "queries": [
+        "GitHub Copilot multi-model agent mode best practices"
+      ]
+    },
+    {
+      "slug": "perplexity",
+      "status": "checked",
+      "urls": [
+        "https://docs.perplexity.ai/docs/agent-api/migrate-from-sonar/overview"
+      ],
+      "docs": [
+        {
+          "url": "https://docs.perplexity.ai/docs/agent-api/migrate-from-sonar/overview",
+          "http": 200,
+          "ok": true,
+          "title": "Migrate from Sonar to the Agent API - Perplexity",
+          "description": "The Agent API represents a major upgrade of Sonar Chat Completions, bringing added configuration and powerful agentic primitives to your AI applications.",
+          "bytes": 600710,
+          "sha256": "bf15d94cdae0dd95"
+        }
+      ],
+      "firecrawl": [],
+      "queries": [
+        "Perplexity Agent API presets Search as Code migration"
+      ]
+    },
+    {
+      "slug": "deepseek",
+      "status": "checked",
+      "urls": [
+        "https://api-docs.deepseek.com/"
+      ],
+      "docs": [
+        {
+          "url": "https://api-docs.deepseek.com/",
+          "http": 200,
+          "ok": true,
+          "title": "Your First API Call | DeepSeek API Docs",
+          "description": "The DeepSeek API uses an API format compatible with OpenAI/Anthropic. By modifying the configuration, you can use the OpenAI/Anthropic SDK or softwares compatible with the OpenAI/Anthropic API to access the DeepSeek API.",
+          "bytes": 48043,
+          "sha256": "7ce9db1b1cc7e2ef"
+        }
+      ],
+      "firecrawl": [],
+      "queries": [
+        "DeepSeek V4.1 Flash thinking modes prompting"
+      ]
+    },
+    {
+      "slug": "qwen",
+      "status": "checked",
+      "urls": [
+        "https://qwen.ai/home"
+      ],
+      "docs": [
+        {
+          "url": "https://qwen.ai/home",
+          "http": 200,
+          "ok": true,
+          "title": "Qwen",
+          "description": "Qwen offers comprehensive functionality spanning chatbot, image and video understanding, image generation, document processing, web search integration, tool utilization, and artifacts.",
+          "bytes": 92469,
+          "sha256": "bf1cca8442c4fa6d"
+        }
+      ],
+      "firecrawl": [],
+      "queries": [
+        "Qwen3.8 Max prompting ChatML thinking guide"
+      ]
+    },
+    {
+      "slug": "hermes",
+      "status": "failed",
+      "urls": [
+        "https://hermes4.nousresearch.com/"
+      ],
+      "docs": [
+        {
+          "url": "https://hermes4.nousresearch.com/",
+          "ok": false,
+          "error": "TypeError: fetch failed"
+        }
+      ],
+      "firecrawl": [],
+      "queries": [
+        "Hermes 4 hybrid think toggle prompting"
+      ]
+    },
+    {
+      "slug": "opencode",
+      "status": "checked",
+      "urls": [
+        "https://opencode.ai/docs"
+      ],
+      "docs": [
+        {
+          "url": "https://opencode.ai/docs",
+          "http": 200,
+          "ok": true,
+          "title": "Intro | AI coding agent built for the terminal",
+          "description": "Get started with OpenCode.",
+          "bytes": 99913,
+          "sha256": "973df6a91d83bcef"
+        }
+      ],
+      "firecrawl": [],
+      "queries": [
+        "OpenCode AGENTS.md agent build plan best practices"
+      ]
+    },
+    {
+      "slug": "mistral",
+      "status": "checked",
+      "urls": [
+        "https://docs.mistral.ai/"
+      ],
+      "docs": [
+        {
+          "url": "https://docs.mistral.ai/",
+          "http": 200,
+          "ok": true,
+          "title": "Documentation - Mistral AI",
+          "description": "Learn how to deploy and use Mistral AI&#x27;s Large Language Models with our comprehensive documentation, guides, and tutorials.",
+          "bytes": 1189244,
+          "sha256": "2cba3b81a63212a9"
+        }
+      ],
+      "firecrawl": [],
+      "queries": [
+        "Mistral Medium 3.5 INST prompting coding"
+      ]
+    },
+    {
+      "slug": "suno-style",
+      "status": "checked",
+      "urls": [
+        "https://about.suno.com/release-notes"
+      ],
+      "docs": [
+        {
+          "url": "https://about.suno.com/release-notes",
+          "http": 200,
+          "ok": true,
+          "title": "Suno | Release Notes",
+          "description": "What&#x27;s new in Suno.",
+          "bytes": 392637,
+          "sha256": "ab592739856b765f"
+        }
+      ],
+      "firecrawl": [],
+      "queries": [
+        "Suno V5.5 style formula 5-part tags BPM 2026"
+      ]
+    },
+    {
+      "slug": "suno-lyrics",
+      "status": "checked",
+      "urls": [
+        "https://about.suno.com/release-notes"
+      ],
+      "docs": [
+        {
+          "url": "https://about.suno.com/release-notes",
+          "http": 200,
+          "ok": true,
+          "title": "Suno | Release Notes",
+          "description": "What&#x27;s new in Suno.",
+          "bytes": 392637,
+          "sha256": "780763db536d6216"
+        }
+      ],
+      "firecrawl": [],
+      "queries": [
+        "Suno V5.5 lyrics structure tags syllable End 2026"
+      ]
+    },
+    {
+      "slug": "chatgpt-image",
+      "status": "checked",
+      "urls": [
+        "https://developers.openai.com/api/docs/guides/image-generation"
+      ],
+      "docs": [
+        {
+          "url": "https://developers.openai.com/api/docs/guides/image-generation",
+          "http": 200,
+          "ok": true,
+          "title": "Image generation | OpenAI API",
+          "description": "Learn how to generate or edit images with the OpenAI API and image generation models.",
+          "bytes": 1213156,
+          "sha256": "d843a159c85f7420"
+        }
+      ],
+      "firecrawl": [],
+      "queries": [
+        "gpt-image-2 prompt guide quality size multi-turn editing"
+      ]
+    }
+  ]
+}
